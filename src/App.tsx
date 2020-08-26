@@ -1,5 +1,12 @@
-import React from 'react';
-import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {
+    HashRouter,
+    Redirect,
+    Route,
+    Switch,
+    useLocation,
+    useHistory,
+} from 'react-router-dom';
 import styled from 'styled-components';
 import Web3ReactManager from 'components/Web3ReactManager';
 import Header from 'components/Header';
@@ -27,35 +34,34 @@ const BuildLink = styled.a`
     margin-left: 5px;
 `;
 
+const PoolSwapView = props => {
+    const { tokenIn, tokenOut } = props.match.params;
+    return <SwapForm tokenIn={tokenIn} tokenOut={tokenOut} />;
+};
+
+const Views = () => {
+    return (
+        <div className="app-shell">
+            <Switch>
+                <Route
+                    path="/swap/:tokenIn?/:tokenOut?"
+                    component={PoolSwapView}
+                />
+                <Redirect from="/" to="/swap" />
+            </Switch>
+        </div>
+    );
+};
+
 const App = () => {
-    const PoolSwapView = props => {
-        const { tokenIn, tokenOut } = props.match.params;
-
-        return <SwapForm tokenIn={tokenIn} tokenOut={tokenOut} />;
-    };
-
     const buildId = process.env.REACT_APP_COMMIT_REF || '';
-
-    const renderViews = () => {
-        return (
-            <div className="app-shell">
-                <Switch>
-                    <Route
-                        path="/swap/:tokenIn?/:tokenOut?"
-                        component={PoolSwapView}
-                    />
-                    <Redirect from="/" to="/swap" />
-                </Switch>
-            </div>
-        );
-    };
 
     return (
         <Web3ReactManager>
             <HashRouter>
                 <Header />
                 <GeneralNotification />
-                {renderViews()}
+                <Views />
                 <BuildVersion>
                     BUILD ID:{' '}
                     <BuildLink
