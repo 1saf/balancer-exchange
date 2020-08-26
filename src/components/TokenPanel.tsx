@@ -168,7 +168,6 @@ const Token = observer(
         value,
         onChange,
         updateSwapFormData,
-        inputID,
         inputName,
         headerText,
         tokenName,

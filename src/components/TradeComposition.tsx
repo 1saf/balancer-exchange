@@ -241,7 +241,7 @@ const TradeComposition = observer(() => {
                             {toAddressStub(swap.firstPoolAddress)}
                         </AddressLink>
                     </Address>
-                    <Arrow>></Arrow>
+                    <Arrow>{`>`}</Arrow>
                     <Address>
                         <AddressLink
                             href={getEtherscanLink(
