@@ -14,6 +14,8 @@ import GeneralNotification from 'components/GeneralNotification';
 import SwapForm from 'components/SwapForm';
 import './App.css';
 
+const fathom = (window as any).fathom;
+
 const BuildVersion = styled.div`
     display: flex;
     flex-direction: row;
@@ -40,6 +42,15 @@ const PoolSwapView = props => {
 };
 
 const Views = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+        fathom &&
+            fathom.trackPageView({
+                url: '/swap',
+            });
+    }, [location?.pathname]);
+
     return (
         <div className="app-shell">
             <Switch>
