@@ -1,11 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-    HashRouter,
-    Redirect,
-    Route,
-    Switch,
-    useLocation,
-} from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Web3ReactManager from 'components/Web3ReactManager';
 import Header from 'components/Header';
@@ -44,20 +38,16 @@ const Views = () => {
     const location = useLocation();
     const pathname = location?.pathname;
     useEffect(() => {
-        fathom &&
-            fathom.trackPageView({
-                url: '/swap',
-            });
+        fathom && fathom.trackPageview({
+            url: '/swap',
+        });
     }, [pathname]);
 
     return (
-        <div className="app-shell">
+        <div className='app-shell'>
             <Switch>
-                <Route
-                    path="/swap/:tokenIn?/:tokenOut?"
-                    component={PoolSwapView}
-                />
-                <Redirect from="/" to="/swap" />
+                <Route path='/swap/:tokenIn?/:tokenOut?' component={PoolSwapView} />
+                <Redirect from='/' to='/swap' />
             </Switch>
         </div>
     );
@@ -74,10 +64,7 @@ const App = () => {
                 <Views />
                 <BuildVersion>
                     BUILD ID:{' '}
-                    <BuildLink
-                        href={`https://github.com/balancer-labs/balancer-exchange/tree/${buildId}`}
-                        target="_blank"
-                    >
+                    <BuildLink href={`https://github.com/balancer-labs/balancer-exchange/tree/${buildId}`} target='_blank'>
                         {buildId.substring(0, 12)}
                     </BuildLink>
                 </BuildVersion>
