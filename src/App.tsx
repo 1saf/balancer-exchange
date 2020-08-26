@@ -5,7 +5,6 @@ import {
     Route,
     Switch,
     useLocation,
-    useHistory,
 } from 'react-router-dom';
 import styled from 'styled-components';
 import Web3ReactManager from 'components/Web3ReactManager';
@@ -43,13 +42,13 @@ const PoolSwapView = props => {
 
 const Views = () => {
     const location = useLocation();
-
+    const pathname = location?.pathname;
     useEffect(() => {
         fathom &&
             fathom.trackPageView({
                 url: '/swap',
             });
-    }, [location?.pathname]);
+    }, [pathname]);
 
     return (
         <div className="app-shell">
